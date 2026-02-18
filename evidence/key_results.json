@@ -1,0 +1,197 @@
+{
+  "project": "Genesis PROV 8: IsoCompiler",
+  "version": "3.0.0",
+  "date": "2026-02-18",
+  "summary": "Automated electromagnetic isolation synthesis for multi-die chiplet packages",
+
+  "headline_metrics": {
+    "isolation_improvement_2d_fdtd_db": {"min": 55.3, "max": 62.6, "unit": "dB"},
+    "isolation_improvement_3d_analytical_db": {"min": 38.6, "max": 39.1, "unit": "dB"},
+    "binarization_pct": 100.0,
+    "frequency_bands_validated": 10,
+    "tests_passing": 132,
+    "patent_claims": 72,
+    "synthesis_families": 5,
+    "dispersive_materials": 20,
+    "drc_violations_total": 0
+  },
+
+  "per_band_results": [
+    {
+      "band": "01",
+      "center_freq_ghz": 1.0,
+      "application": "IoT / Low-Speed SerDes",
+      "baseline_s21_db": -1.1,
+      "optimized_s21_db": -56.4,
+      "improvement_2d_db": 55.3,
+      "improvement_3d_db": 39.1,
+      "binarization_pct": 100.0,
+      "metal_fill_pct": 57.1,
+      "drc_passed": true,
+      "grid_size": "120x60",
+      "design_size": "60x30"
+    },
+    {
+      "band": "02",
+      "center_freq_ghz": 3.0,
+      "application": "USB4 / PCIe Gen3",
+      "baseline_s21_db": -0.9,
+      "optimized_s21_db": -58.1,
+      "improvement_2d_db": 57.2,
+      "improvement_3d_db": 38.7,
+      "binarization_pct": 100.0,
+      "metal_fill_pct": 66.2,
+      "drc_passed": true,
+      "grid_size": "120x60",
+      "design_size": "60x30"
+    },
+    {
+      "band": "03",
+      "center_freq_ghz": 5.0,
+      "application": "WiFi 6 / PCIe Gen4",
+      "baseline_s21_db": -0.9,
+      "optimized_s21_db": -60.2,
+      "improvement_2d_db": 59.2,
+      "improvement_3d_db": 38.7,
+      "binarization_pct": 100.0,
+      "metal_fill_pct": 66.2,
+      "drc_passed": true,
+      "grid_size": "120x60",
+      "design_size": "60x30"
+    },
+    {
+      "band": "04",
+      "center_freq_ghz": 10.0,
+      "application": "High-Speed ADC / PCIe Gen6",
+      "baseline_s21_db": -0.9,
+      "optimized_s21_db": -60.2,
+      "improvement_2d_db": 59.2,
+      "improvement_3d_db": 38.7,
+      "binarization_pct": 100.0,
+      "metal_fill_pct": 66.2,
+      "drc_passed": true,
+      "grid_size": "120x60",
+      "design_size": "60x30"
+    },
+    {
+      "band": "05",
+      "center_freq_ghz": 12.0,
+      "application": "Ku-Band Satellite",
+      "baseline_s21_db": -0.9,
+      "optimized_s21_db": -59.2,
+      "improvement_2d_db": 58.3,
+      "improvement_3d_db": 38.7,
+      "binarization_pct": 100.0,
+      "metal_fill_pct": 66.2,
+      "drc_passed": true,
+      "grid_size": "120x60",
+      "design_size": "60x30"
+    },
+    {
+      "band": "06",
+      "center_freq_ghz": 20.0,
+      "application": "5G FR2 Lower Band",
+      "baseline_s21_db": -0.9,
+      "optimized_s21_db": -58.4,
+      "improvement_2d_db": 57.5,
+      "improvement_3d_db": 38.6,
+      "binarization_pct": 100.0,
+      "metal_fill_pct": 66.6,
+      "drc_passed": true,
+      "grid_size": "120x60",
+      "design_size": "60x30"
+    },
+    {
+      "band": "07",
+      "center_freq_ghz": 28.0,
+      "application": "5G FR2 (n257/n261)",
+      "baseline_s21_db": -0.9,
+      "optimized_s21_db": -60.6,
+      "improvement_2d_db": 59.7,
+      "improvement_3d_db": 39.1,
+      "binarization_pct": 100.0,
+      "metal_fill_pct": 57.3,
+      "drc_passed": true,
+      "grid_size": "120x60",
+      "design_size": "60x30"
+    },
+    {
+      "band": "08",
+      "center_freq_ghz": 39.0,
+      "application": "5G FR2 (n260)",
+      "baseline_s21_db": -0.9,
+      "optimized_s21_db": -62.7,
+      "improvement_2d_db": 61.8,
+      "improvement_3d_db": 39.1,
+      "binarization_pct": 100.0,
+      "metal_fill_pct": 57.3,
+      "drc_passed": true,
+      "grid_size": "120x60",
+      "design_size": "60x30"
+    },
+    {
+      "band": "09",
+      "center_freq_ghz": 56.0,
+      "application": "112G SerDes / WiGig",
+      "baseline_s21_db": -0.9,
+      "optimized_s21_db": -62.7,
+      "improvement_2d_db": 61.8,
+      "improvement_3d_db": 39.1,
+      "binarization_pct": 100.0,
+      "metal_fill_pct": 57.3,
+      "drc_passed": true,
+      "grid_size": "120x60",
+      "design_size": "60x30"
+    },
+    {
+      "band": "10",
+      "center_freq_ghz": 77.0,
+      "application": "Automotive Radar (ADAS)",
+      "baseline_s21_db": -4.2,
+      "optimized_s21_db": -66.7,
+      "improvement_2d_db": 62.6,
+      "improvement_3d_db": 39.1,
+      "binarization_pct": 100.0,
+      "metal_fill_pct": 57.4,
+      "drc_passed": true,
+      "grid_size": "120x60",
+      "design_size": "60x30"
+    }
+  ],
+
+  "solver_validation": {
+    "analytical_tests": [
+      {"name": "free_space_propagation", "expected": "S21 near 0 dB", "tolerance_db": 10, "status": "PASS"},
+      {"name": "pec_wall_reflection", "expected": "S21 < -30 dB", "tolerance_db": null, "status": "PASS"},
+      {"name": "dielectric_slab_tmm", "expected": "exact T(f)", "tolerance_db": 5, "status": "PASS"},
+      {"name": "substrate_mode_coupling", "expected": "analytical estimate", "tolerance_db": 15, "status": "PASS"}
+    ],
+    "multi_frequency_sweep": {
+      "f_norm_values": [0.03, 0.05, 0.08, 0.10, 0.15, 0.20],
+      "status": "ALL_PASS"
+    },
+    "3d_fdtd_smoke_test": {
+      "isolation_improvement_db": 40.2,
+      "baseline_db": -17.3,
+      "isolated_db": -57.5,
+      "status": "PASS"
+    }
+  },
+
+  "synthesis_families_validated": [
+    {"name": "via_fence", "validation": "geometry + GDSII export", "status": "PASS"},
+    {"name": "mushroom_ebg", "validation": "Sievenpiper LC bandgap model", "status": "PASS"},
+    {"name": "fractal_ebg", "validation": "Bragg reflection model", "status": "PASS"},
+    {"name": "metasurface_dgs", "validation": "slot resonance + impedance matching", "status": "PASS"},
+    {"name": "inverse_design", "validation": "adjoint gradient + 100% binarization", "status": "PASS"}
+  ],
+
+  "honest_disclosures": {
+    "fabrication_validated": false,
+    "measurement_validated": false,
+    "primary_solver": "2D TMz FDTD (not 3D full-wave)",
+    "2d_3d_gap_db": "16-24 dB (expected from missing out-of-plane leakage)",
+    "drc_tool": "KLayout (not production foundry DRC)",
+    "material_models": "published parameters (not measured per-lot data)"
+  }
+}

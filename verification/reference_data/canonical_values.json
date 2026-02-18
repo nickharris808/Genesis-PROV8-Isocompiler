@@ -1,0 +1,91 @@
+{
+  "metadata": {
+    "project": "Genesis PROV 8: IsoCompiler",
+    "version": "3.0.0",
+    "source": "patents/generation_summary.json and solver validation suite",
+    "date": "2026-02-18",
+    "description": "Canonical reference values for verification of IsoCompiler claims"
+  },
+
+  "isolation_improvement_2d": {
+    "min_db": 55.3,
+    "max_db": 62.6,
+    "tolerance_db": 2.0,
+    "description": "2D FDTD isolation improvement range across 10 bands"
+  },
+
+  "isolation_improvement_3d": {
+    "min_db": 38.6,
+    "max_db": 39.1,
+    "tolerance_db": 2.0,
+    "description": "3D analytical isolation improvement range across 10 bands"
+  },
+
+  "binarization": {
+    "min_pct": 99.0,
+    "target_pct": 100.0,
+    "description": "Minimum acceptable binarization percentage for manufacturable output"
+  },
+
+  "frequency_bands": {
+    "count": 10,
+    "center_frequencies_ghz": [1.0, 3.0, 5.0, 10.0, 12.0, 20.0, 28.0, 39.0, 56.0, 77.0],
+    "description": "All 10 frequency bands must have valid simulation results"
+  },
+
+  "test_suite": {
+    "total_tests": 132,
+    "min_passing": 132,
+    "description": "All 132 tests must pass"
+  },
+
+  "patent_claims": {
+    "total": 72,
+    "per_band": 7,
+    "cross_band": 2,
+    "description": "10 bands x 7 claims + 2 cross-band integration claims"
+  },
+
+  "synthesis_families": {
+    "count": 5,
+    "names": ["via_fence", "mushroom_ebg", "fractal_ebg", "metasurface", "inverse_design"],
+    "description": "All 5 synthesis families must be present and validated"
+  },
+
+  "fdtd_convergence": {
+    "min_cells_per_wavelength": 20,
+    "courant_3d_limit": 0.577,
+    "courant_2d_limit": 0.707,
+    "pml_cells": 20,
+    "pml_reflection_db": -60,
+    "description": "Grid resolution and CFL stability requirements"
+  },
+
+  "s21_extraction": {
+    "window_function": "hanning",
+    "min_spectral_quality": 0.01,
+    "max_plausible_improvement_db": 80.0,
+    "min_plausible_improvement_db": 10.0,
+    "categories": ["GENUINE", "MARGINAL", "ARTIFACT"],
+    "description": "S21 extraction quality requirements"
+  },
+
+  "drc": {
+    "violations_allowed": 0,
+    "tool": "KLayout",
+    "description": "Zero DRC violations across all bands"
+  },
+
+  "per_band_reference": [
+    {"band": "01", "freq_ghz": 1.0,  "improvement_2d_db": 55.3, "improvement_3d_db": 39.1, "binarization_pct": 100.0},
+    {"band": "02", "freq_ghz": 3.0,  "improvement_2d_db": 57.2, "improvement_3d_db": 38.7, "binarization_pct": 100.0},
+    {"band": "03", "freq_ghz": 5.0,  "improvement_2d_db": 59.2, "improvement_3d_db": 38.7, "binarization_pct": 100.0},
+    {"band": "04", "freq_ghz": 10.0, "improvement_2d_db": 59.2, "improvement_3d_db": 38.7, "binarization_pct": 100.0},
+    {"band": "05", "freq_ghz": 12.0, "improvement_2d_db": 58.3, "improvement_3d_db": 38.7, "binarization_pct": 100.0},
+    {"band": "06", "freq_ghz": 20.0, "improvement_2d_db": 57.5, "improvement_3d_db": 38.6, "binarization_pct": 100.0},
+    {"band": "07", "freq_ghz": 28.0, "improvement_2d_db": 59.7, "improvement_3d_db": 39.1, "binarization_pct": 100.0},
+    {"band": "08", "freq_ghz": 39.0, "improvement_2d_db": 61.8, "improvement_3d_db": 39.1, "binarization_pct": 100.0},
+    {"band": "09", "freq_ghz": 56.0, "improvement_2d_db": 61.8, "improvement_3d_db": 39.1, "binarization_pct": 100.0},
+    {"band": "10", "freq_ghz": 77.0, "improvement_2d_db": 62.6, "improvement_3d_db": 39.1, "binarization_pct": 100.0}
+  ]
+}

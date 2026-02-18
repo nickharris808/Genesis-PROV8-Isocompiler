@@ -1,0 +1,7 @@
+# Requirements for IsoCompiler verification script
+# No heavy dependencies needed -- the verification script uses only
+# the Python standard library (json, math, argparse, pathlib, sys).
+#
+# If you want to extend verification with numerical checks:
+# numpy>=1.26
+# scipy>=1.11
