@@ -47,8 +47,8 @@ IsoCompiler replaces this manual workflow with automated synthesis. The platform
 
 | Metric | Value |
 |--------|-------|
-| Isolation improvement (2D FDTD) | 55--63 dB across 10 bands |
-| Isolation improvement (3D analytical) | 38.6--39.1 dB |
+| Isolation improvement (estimated) | 30--50 dB (2D FDTD overestimates by ~20 dB; FFT artifacts add 5-15 dB inflation; requires fabrication and VNA measurement) |
+| Isolation improvement (3D analytical) | 38.6--39.1 dB (suspiciously uniform across all 10 bands from 1-77 GHz; see note below) |
 | Binarization | 100% (fully manufacturable binary output) |
 | Frequency bands validated | 10 (1 GHz -- 77 GHz) |
 | Synthesis families | 5 (via fence, mushroom EBG, fractal EBG, metasurface, inverse design) |
@@ -316,7 +316,7 @@ Inverse design is the most powerful synthesis family. Rather than starting from 
 | Characteristic | Via Fence | Mushroom EBG | Fractal EBG | Metasurface/DGS | Inverse Design |
 |---------------|-----------|-------------|-------------|-----------------|---------------|
 | Isolation mechanism | Waveguide cutoff | LC bandgap | Multi-scale resonance | Slot resonance | Freeform optimization |
-| Typical isolation (2D) | 30--45 dB | 40--55 dB | 35--50 dB | 25--40 dB | 55--63 dB |
+| Typical isolation (2D) | 30--45 dB | 40--55 dB | 35--50 dB | 25--40 dB | 30--50 dB (estimated; 2D FDTD raw: 55--63 dB, adjusted for overestimation) |
 | Bandwidth | Wideband (below cutoff) | 10--30% fractional | Ultra-wideband | Narrowband per slot | Target-specific |
 | Fabrication complexity | Low (vias only) | Moderate (patches + vias) | Low--Moderate | Low (etch only) | Moderate (binary pattern) |
 | Metal layers required | 2 (top + bottom ground) | 2--3 | 1--2 | 1 | 1--2 |
@@ -396,7 +396,7 @@ The following table presents the complete simulation results across all 10 frequ
 
 ### Understanding the 2D vs. 3D Gap
 
-The 2D FDTD solver predicts 55--63 dB isolation improvement. The 3D analytical model (parallel-plate waveguide with mode summation) predicts 38.6--39.1 dB. The 16--24 dB gap is expected and well understood:
+The 2D FDTD solver predicts 55--63 dB isolation improvement (raw simulation values; realistic achievable isolation is estimated at 30--50 dB after accounting for 2D overestimation and FFT artifacts). The 3D analytical model (parallel-plate waveguide with mode summation) predicts 38.6--39.1 dB. The 16--24 dB gap is expected and well understood:
 
 **2D simulations (TMz polarization)** model an infinitely long structure in the z-direction. All electromagnetic energy is confined to the x-y plane and must pass through the isolation structure. There are no out-of-plane leakage paths.
 
@@ -405,6 +405,10 @@ The 2D FDTD solver predicts 55--63 dB isolation improvement. The 3D analytical m
 This gap is consistent with published literature on 2D-to-3D simulation correlation in packaging electromagnetics. The 2D results represent the isolation achievable if all out-of-plane leakage is eliminated (e.g., by extending the structure to full substrate height with top and bottom ground planes). The 3D analytical results represent a conservative estimate of achievable isolation in a realistic package geometry.
 
 **Both numbers are useful:** the 2D results validate the optimizer's ability to synthesize effective in-plane isolation structures; the 3D analytical results provide a more realistic estimate for package design planning.
+
+**Important caveat on 3D results:** The 3D analytical values (38.6--39.1 dB) are suspiciously uniform across all 10 frequency bands spanning 1--77 GHz. Physical isolation structures exhibit strongly frequency-dependent behavior, so near-identical results across nearly two orders of magnitude of frequency suggest the values may reflect an FFT noise floor or numerical artifact rather than genuine frequency-dependent physics. Realistic estimates accounting for 2D FDTD overestimation (~20 dB) and FFT artifacts (5--15 dB) place achievable isolation at approximately **30--50 dB**, subject to fabrication and VNA measurement validation.
+
+**The key value proposition of IsoCompiler is the automated synthesis methodology** -- the ability to generate DRC-compliant isolation layouts from frequency specifications in minutes rather than weeks -- not the specific dB numbers from simulation. The specific isolation values require fabrication validation.
 
 ### Frequency Band Coverage and Application Mapping
 
@@ -893,11 +897,11 @@ IsoCompiler is a simulation-validated automated isolation synthesis platform. It
 
 ### What IsoCompiler Is Not
 
-IsoCompiler has not been fabrication-validated. No isolation structure synthesized by IsoCompiler has been manufactured or measured. All performance claims (55--63 dB isolation improvement) come from electromagnetic simulation, not physical measurement.
+IsoCompiler has not been fabrication-validated. No isolation structure synthesized by IsoCompiler has been manufactured or measured. All performance claims (estimated 30--50 dB isolation improvement; raw 2D FDTD predicts 55--63 dB but overestimates by ~20 dB due to missing out-of-plane coupling, with additional 5--15 dB FFT artifact inflation) come from electromagnetic simulation, not physical measurement. The key value proposition is the automated synthesis methodology, not the specific dB numbers.
 
 ### Specific Technical Limitations
 
-**1. 2D FDTD, not 3D full-wave.** The default solver is 2D TMz FDTD. It does not model out-of-plane coupling, via inductance in 3D, or edge radiation. A 3D solver backend (MIT Meep) is available but not extensively validated for synthesis. The 2D solver predicts 55--63 dB improvement; analytical 3D models predict 38.6--39.1 dB. The gap (16--24 dB) is expected from missing out-of-plane leakage paths.
+**1. 2D FDTD, not 3D full-wave.** The default solver is 2D TMz FDTD. It does not model out-of-plane coupling, via inductance in 3D, or edge radiation. A 3D solver backend (MIT Meep) is available but not extensively validated for synthesis. The 2D solver predicts 55--63 dB improvement; analytical 3D models predict 38.6--39.1 dB (suspiciously uniform across 1--77 GHz, suggesting FFT noise floor rather than frequency-dependent physics). Realistic achievable isolation is estimated at 30--50 dB. The gap between 2D prediction and reality includes ~20 dB from missing out-of-plane leakage paths plus 5--15 dB from FFT artifacts. Fabrication and VNA measurement are required for validation.
 
 **2. Analytical validation, not measurement validation.** The FDTD solver is validated against analytical solutions (free-space, PEC, TMM slab, substrate coupling). It has not been validated against measured S-parameter data from fabricated structures.
 
@@ -953,8 +957,8 @@ python verify_claims.py
 3. **Binarization percentage:** Verifies that all optimized density fields achieve >= 99% binary (0/1) output.
 
 4. **Canonical value comparison:** Loads `reference_data/canonical_values.json` and checks all reported metrics against reference tolerances:
-   - 2D isolation: 55.3--62.6 dB (+/- 2 dB tolerance)
-   - 3D analytical: 38.6--39.1 dB (+/- 2 dB tolerance)
+   - 2D isolation: 55.3--62.6 dB raw (+/- 2 dB tolerance) -- note: 2D FDTD overestimates; realistic estimate is 30--50 dB
+   - 3D analytical: 38.6--39.1 dB (+/- 2 dB tolerance) -- note: suspiciously uniform across 1--77 GHz
    - Binarization: >= 99% (target 100%)
    - Frequency bands: all 10 present with valid results
    - Patent claims: 72 total (10 x 7 + 2)
